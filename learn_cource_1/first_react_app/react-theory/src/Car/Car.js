@@ -1,9 +1,15 @@
 import React from 'react';
 
 export default props => (
-<div>
+<div style={{
+    border:'1px solid #ccc',
+    marginBottom: '10px',
+    display: 'block',
+    padding: '10px'
+}}>
     <h3>Can name: {props.name}</h3>
     <p>Number: <strong>{props.year}</strong></p>
-    <button onClick={props.onchangeTitle}>Click</button>
+    <input type="text" onChange={props.onchangeName} value={props.name}/>
+    <button onClick={props.onDelete}>Delete</button>
 </div>
 );
