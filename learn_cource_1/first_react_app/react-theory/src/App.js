@@ -25,17 +25,10 @@ class App extends React.Component {
     })
   }
 
-  changeShowCars = ()=>{
-    if(this.state.showCars)
-    {
-      this.setState({
-        showCars: false
-      })
-    } else {
-      this.setState({
-        showCars: true
-      })
-    }
+  toggleCarsHandler = () => {
+    this.setState({
+      showCars: !this.state.showCars
+    })
   }
   
   render () {
@@ -44,35 +37,34 @@ class App extends React.Component {
       textAlign:'center'
     }
 
-    const cars = this.state.cars;
+
+
+    let cars = null;
+    if(this.state.showCars)
+    {
+      cars = this.state.cars.map((car, index)=>{
+
+        return (
+          <Car 
+            key={index}
+            name={car.name}
+            year={car.year}
+            onchangeTitle={() => this.changeTitleHandler(car.name)}
+          />
+        )
+
+    })
+    }
     return (
       <div style={divStyle}>
         <h1>{this.state.pageTitle}</h1>
         
         <button 
-        onClick={this.changeTitleHandler.bind(this, 'Changed!')}
-        >Change title</button>
+        onClick={this.toggleCarsHandler}
+        >Toggle Cars</button>
+       
 
-        <button 
-        onClick={this.changeShowCars.bind(this)}
-        >Toggle Show Cars</button>
-        
-
-        {          
-          this.state.cars.map((car, index)=>{
-            if(this.state.showCars){
-              return (
-                <Car 
-                  key={index}
-                  name={car.name}
-                  year={car.year}
-                  onchangeTitle={() => this.changeTitleHandler(car.name)}
-                />
-              )
-            }
-          
-
-        }) }
+        { cars }
 
       </div>   
   );
