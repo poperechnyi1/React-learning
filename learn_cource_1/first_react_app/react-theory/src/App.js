@@ -19,10 +19,23 @@ class App extends React.Component {
     showCars: false
   }
 
-  changeTitleHandler = (newTitle) => {
+  onchangeName(name, index){
+    const car = this.state.cars[index];
+    car.name = name;
+    const cars = [...this.state.cars];
+    cars[index] = car;
     this.setState({
-      pageTitle: newTitle
+      cars
     })
+  }
+
+  deleteHandler (index){
+    const cars = this.state.cars.concat();
+    cars.splice(index, 1);
+    this.setState({
+      cars
+    })
+    
   }
 
   toggleCarsHandler = () => {
@@ -32,7 +45,6 @@ class App extends React.Component {
   }
   
   render () {
-    console.log('Render')
     const divStyle = {
       textAlign:'center'
     }
@@ -49,7 +61,8 @@ class App extends React.Component {
             key={index}
             name={car.name}
             year={car.year}
-            onchangeTitle={() => this.changeTitleHandler(car.name)}
+            onDelete={this.deleteHandler.bind(this, index)}
+            onchangeName={event => this.onchangeName(event.target.value, index)}
           />
         )
 
