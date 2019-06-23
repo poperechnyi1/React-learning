@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Car from './Car/Car';
 
 
@@ -74,6 +74,7 @@ class App extends React.Component {
         
         <button 
         onClick={this.toggleCarsHandler}
+        className={'AppButton'}
         >Toggle Cars</button>
        
       <div style={{
