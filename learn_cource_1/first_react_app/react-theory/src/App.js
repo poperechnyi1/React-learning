@@ -4,20 +4,28 @@ import Car from './Car/Car';
 
 
 class App extends React.Component {
-  state = {
-    cars: [{
-      name: 'Ford',
-      year: 2018
-    },{
-      name: 'Audi',
-      year: 2016
-    },{
-      name: 'Mazda',
-      year: 2010
-    }],
-    pageTitle: 'React components',
-    showCars: false
+
+  constructor(props){
+    console.log('App constructor');
+    
+    super(props)
+
+    this.state = {
+      cars: [{
+        name: 'Ford',
+        year: 2018
+      },{
+        name: 'Audi',
+        year: 2016
+      },{
+        name: 'Mazda',
+        year: 2010
+      }],
+      pageTitle: 'React components',
+      showCars: false
+    }
   }
+
 
   onchangeName(name, index){
     const car = this.state.cars[index];
@@ -43,8 +51,23 @@ class App extends React.Component {
       showCars: !this.state.showCars
     })
   }
+
+  componentWillMount() {
+    console.log('App componentWillMount');
+  }
   
+  componentDidMount(){
+    console.log('App componentDidMount');
+  }
+
+
+
+
+
   render () {
+    console.log('App render');
+
+
     const divStyle = {
       textAlign:'center'
     }
