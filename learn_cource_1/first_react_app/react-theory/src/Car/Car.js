@@ -17,7 +17,6 @@ class Car extends React.Component {
             this.inputRef.current.focus();
         }
 
-        this.inputRef.current.style.background = 'red'
     }
     render() {
         console.log('Car render')
