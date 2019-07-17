@@ -5,8 +5,6 @@ import Quiz from './containers/Quiz/Quiz';
 
 class App extends React.Component {
   render () {
-
-    console.log(classes)
     return (
       <div className={classes.App}>
         <Layout>
