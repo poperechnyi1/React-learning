@@ -4,10 +4,12 @@ import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 
 class Quiz extends Component{
     state ={
+        activeQuestion: 1,
         quiz: [
             {
                 question: 'What is the sky color?',
                 rightAnswerId: 2,
+                id: 1,
                 answers: [
                     {
                         text: 'Black',
@@ -26,12 +28,39 @@ class Quiz extends Component{
                         id: 4
                     }
                 ]
+            },
+            {
+                question: 'What was Kyiv based ?',
+                rightAnswerId: 2,
+                id: 2,
+                answers: [
+                    {
+                        text: '1994',
+                        id: 1
+                    },
+                    {
+                        text: '4991',
+                        id: 2
+                    },
+                    {
+                        text: '9419',
+                        id: 3
+                    },
+                    {
+                        text: '9941',
+                        id: 4
+                    }
+                ]
             }
         ]
     }
 
     onAnswerClickHandler = (answerId) => {
         console.log('Answer Id: ',answerId);
+
+        this.setState({
+            activeQuestion: this.state.activeQuestion + 1
+        })
     }
 
     render(){
@@ -40,9 +69,11 @@ class Quiz extends Component{
                 <div className={classes.QuizWrapper}>
                     <h1>Answer the questions</h1>
                     <ActiveQuiz 
-                    answers={this.state.quiz[0].answers}
-                    question={this.state.quiz[0].question}
+                    answers={this.state.quiz[this.state.activeQuestion].answers}
+                    question={this.state.quiz[this.state.activeQuestion].question}
                     onAnswerClick = {this.onAnswerClickHandler}
+                    quizLength={this.state.quiz.length}
+                    answerNumber={this.state.activeQuestion}
                     />
                 </div>
             </div>
