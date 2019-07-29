@@ -3,8 +3,9 @@ import classes from './Quiz.css';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 
 class Quiz extends Component{
-    state ={
-        activeQuestion: 1,
+    state = {
+        activeQuestion: 0,
+        answerState: null, //{[id]:'success' 'error'}
         quiz: [
             {
                 question: 'What is the sky color?',
@@ -30,7 +31,7 @@ class Quiz extends Component{
                 ]
             },
             {
-                question: 'What was Kyiv based ?',
+                question: 'When was Kyiv based ?',
                 rightAnswerId: 2,
                 id: 2,
                 answers: [
@@ -56,14 +57,52 @@ class Quiz extends Component{
     }
 
     onAnswerClickHandler = (answerId) => {
-        console.log('Answer Id: ',answerId);
+        if(this.state.answerState)
+        {
+            const key = Object.key(this.state.answerState)[0];
 
-        this.setState({
-            activeQuestion: this.state.activeQuestion + 1
-        })
+            if(this.state.answerState[key] === 'success')
+            {
+                return
+            }
+        }
+
+        const question = this.state.quiz[this.state.activeQuestion]
+
+        if(question.rightAnswerId === answerId)
+        {
+
+            this.setState({
+                answerState: {[answerId]: 'success'}
+            });
+
+            const timeout = window.setTimeout(()=>{
+                if(this.isQuzFinished()){
+                   console.log('Finished');
+                } else {
+                    this.setState({
+                        activeQuestion: this.state.activeQuestion + 1,
+                        answerState: null
+                    });
+                }
+
+                window.clearTimeout(timeout);
+            }, 1000)
+        } else {
+            this.setState({
+                answerState: {[answerId]: 'error'}
+            });
+        }
+    }
+
+
+    isQuzFinished(){
+        return this.state.activeQuestion + 1 === this.state.quiz.length;
     }
 
     render(){
+
+        console.log(68 , this.state.quiz[this.state.activeQuestion].answers)
         return (
             <div className = {classes.Quiz}>
                 <div className={classes.QuizWrapper}>
@@ -73,7 +112,8 @@ class Quiz extends Component{
                     question={this.state.quiz[this.state.activeQuestion].question}
                     onAnswerClick = {this.onAnswerClickHandler}
                     quizLength={this.state.quiz.length}
-                    answerNumber={this.state.activeQuestion}
+                    answerNumber={this.state.activeQuestion + 1}
+                    state={this.state.answerState}
                     />
                 </div>
             </div>
