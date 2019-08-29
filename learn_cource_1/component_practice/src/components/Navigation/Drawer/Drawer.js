@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import classes from './Drawer.css';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const links = [
-    1,2,3
+    1, 2, 3
 ];
 
 class Drawer extends Component {
-    renderLinks(){
+    renderLinks() {
         return links.map((link, index) => {
             return (
                 <li key={index}>
@@ -16,21 +17,24 @@ class Drawer extends Component {
         })
     }
 
-    render(){
+    render() {
         const cls = [
             classes.Drawer
         ];
 
-        if(!this.props.isOpen){
+        if (!this.props.isOpen) {
             cls.push(classes.close);
         }
 
-        return(
-            <nav className={cls.join(' ')}>
-                <ul>
-                    {this.renderLinks()}
-                </ul>
-            </nav>
+        return (
+            <React.Fragment>
+                <nav className={cls.join(' ')}>
+                    <ul>
+                        {this.renderLinks()}
+                    </ul>
+                </nav>
+                {this.props.isOpen ? <Backdrop onClick={this.props.onClose}/> : null}
+            </React.Fragment>
         )
     }
 }
