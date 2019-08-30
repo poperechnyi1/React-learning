@@ -4,6 +4,7 @@ import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import About from './About/About'
 import Cars from './Cars/Cars'
 import CarDetail from './CarDetail/CarDetail'
+import NotFound from './404/404';
 
 class App extends Component {
 
@@ -55,7 +56,8 @@ class App extends Component {
 
           <Route path="/cars/:name" component={CarDetail} />
           <Route path="/cars" component={Cars} />
-          <Redirect to={'/'} />
+          <Route component={NotFound}/>
+          {/* <Redirect to={'/'} /> */}
           {/* <Route render={()=> <h1 style={{color: 'red', textAlign:'center'}}>404 Not Found</h1>} /> */}
         </Switch>
       </div>
