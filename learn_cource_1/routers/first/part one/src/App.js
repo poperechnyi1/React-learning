@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.scss'
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import About from './About/About'
 import Cars from './Cars/Cars'
 import CarDetail from './CarDetail/CarDetail'
@@ -37,10 +37,12 @@ class App extends Component {
         <hr />
         {/* localhost:3000 */}
         <Switch>
-          <Route path="/" exact render={() => <h1>Home page</h1>} />
+          <Route path="/" exact render={() => <h1 style={{textAlign:'center'}}>Home page</h1>} />
           <Route path="/about" component={About} />
           <Route path="/cars/:name" component={CarDetail} />
           <Route path="/cars" component={Cars} />
+          <Redirect to={'/'} />
+          {/* <Route render={()=> <h1 style={{color: 'red', textAlign:'center'}}>404 Not Found</h1>} /> */}
         </Switch>
       </div>
     );
