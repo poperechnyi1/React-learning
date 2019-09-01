@@ -5,6 +5,36 @@ import Input from '../../components/UI/Input/Input'
 
 export default class Auth extends Component {
 
+  state = {
+    formControls: {
+      email: {
+        value: '',
+        type: 'email',
+        label: 'Email',
+        errorMessage: 'Введите коректный email',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      password: {
+        value: '',
+        type: 'password',
+        label: 'Пароль',
+        errorMessage: 'Введите корректный пароль',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 6
+        }
+
+      }
+    }
+  }
+
   loginHandler = () => {
 
   }
@@ -17,6 +47,29 @@ export default class Auth extends Component {
     event.preventDefault();
   }
 
+  onChangeHandler = (event, controleName) => {
+    console.log(`${controleName}: `, event.target.value)
+  }
+
+  renderInputs() {
+    return Object.keys(this.state.formControls).map((
+      controlName, index
+    )=>{
+      const control = this.state.formControls[controlName];
+      return (<Input 
+        key={controlName + index}
+        type={control.type}
+        value={control.value}
+        valid={control.valid}
+        touched={control.touched}
+        label={control.label}
+        shouldValidate={!!control.validation}
+        errorMessage={control.errorMessage}
+        onChange={event => this.onChangeHandler(event, controlName)}
+      />)
+    })
+  }
+
   render() {
     return (
       <div className={classes.Auth}>
@@ -24,12 +77,7 @@ export default class Auth extends Component {
           <h1>Авторизация</h1>
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             
-            <Input 
-              label='Email'
-            />
-            <Input 
-              label='Пароль'
-            />
+           {this.renderInputs()}
 
             <Button 
               type="success" 
