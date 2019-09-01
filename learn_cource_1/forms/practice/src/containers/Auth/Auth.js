@@ -13,7 +13,7 @@ export default class Auth extends Component {
   }
 
   submitHandler = event => {
-    event.preventDefault()
+    event.preventDefault();
   }
 
   render() {
@@ -21,20 +21,19 @@ export default class Auth extends Component {
       <div className={classes.Auth}>
         <div>
           <h1>Авторизация</h1>
-
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
-            <input type="text"/>
-            <input type="text"/>
+            <input type='text'/>
+            <input type='text'/>
 
-            <Button
-              type="success"
+            <Button 
+              type="success" 
               onClick={this.loginHandler}
             >
               Войти
             </Button>
 
-            <Button
-              type="primary"
+            <Button 
+              type="primary" 
               onClick={this.registerHandler}
             >
               Зарегистрироваться
