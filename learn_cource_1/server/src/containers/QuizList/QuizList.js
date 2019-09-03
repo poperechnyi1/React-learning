@@ -1,40 +1,34 @@
-import React, { Component } from 'react';
-import classes from './QuizList.css';
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, {Component} from 'react'
+import classes from './QuizList.css'
+import {NavLink} from 'react-router-dom'
 
 export default class QuizList extends Component {
 
-    renderQuizes() {
-        return [1, 2, 3].map((quiz, index) => {
-            return (
-                <li
-                    key={index}
-                >
-                    <NavLink to={'/quiz/' + quiz}>
-                        Тест {quiz}
-                    </NavLink>
-                </li>
-            )
-        })
-    }
+  renderQuizes() {
+    return [1, 2, 3].map((quiz, index) => {
+      return (
+        <li
+          key={index}
+        >
+          <NavLink to={'/quiz/' + quiz}>
+            Тест {quiz}
+          </NavLink>
+        </li>
+      )
+    })
+  }
 
-    componentDidMount(){
-        axios.get('http://react-quiz-3e9b0.firebaseio.com/quiz.json').then(response => {
-            console.log(response);
-        })
-    }
+  render() {
+    return (
+      <div className={classes.QuizList}>
+        <div>
+          <h1>Список тестов</h1>
 
-    render() {
-        return (
-            <div className={classes.QuizList}>
-                <div>
-                    <h1>Список тестов</h1>
-                    <ul>
-                        {this.renderQuizes()}
-                    </ul>
-                </div>
-            </div>
-        )
-    }
+          <ul>
+            { this.renderQuizes() }
+          </ul>
+        </div>
+      </div>
+    )
+  }
 }

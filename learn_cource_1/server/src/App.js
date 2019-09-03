@@ -6,7 +6,6 @@ import QuizList from './containers/QuizList/QuizList'
 import Auth from './containers/Auth/Auth'
 import QuizCreator from './containers/QuizCreator/QuizCreator'
 
-
 class App extends Component {
   render() {
     return (

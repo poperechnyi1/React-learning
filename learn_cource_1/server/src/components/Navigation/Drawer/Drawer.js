@@ -4,21 +4,9 @@ import {NavLink} from 'react-router-dom'
 import Backdrop from '../../UI/Backdrop/Backdrop'
 
 const links = [
-  {
-    to:'/',
-    label:'Список',
-    exact:true
-  }, 
-  {
-    to:'/auth',
-    label:'Авторизация',
-    exact:false
-  }, 
-  {
-    to:'/quiz-create',
-    label:'Создать тест',
-    exact:false
-  }
+  {to: '/', label: 'Список', exact: true},
+  {to: '/auth', label: 'Авторизация', exact: false},
+  {to: '/quiz-creator', label: 'Создать тест', exact: false}
 ]
 
 class Drawer extends Component {
@@ -31,13 +19,13 @@ class Drawer extends Component {
     return links.map((link, index) => {
       return (
         <li key={index}>
-          <NavLink 
+          <NavLink
             to={link.to}
             exact={link.exact}
             activeClassName={classes.active}
             onClick={this.clickHandler}
           >
-          {link.label}
+            {link.label}
           </NavLink>
         </li>
       )
