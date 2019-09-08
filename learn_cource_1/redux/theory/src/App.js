@@ -4,7 +4,8 @@ import './App.scss'
 
 class App extends Component {
   state = {
-    counter: 0
+    counter: 0,
+    numberInInput: 0
   }
 
   updateCounter(value) {
@@ -20,9 +21,26 @@ class App extends Component {
         <hr/>
 
         <div className="Actions">
-          <button onClick={() => this.updateCounter(1)}>Добавить 1</button>
-          <button onClick={() => this.updateCounter(-1)}>Вычесть 1</button>
+          <button onClick={this.props.onAdd}>Добавить 1</button>
+          <button onClick={this.props.onSub}>Вычесть 1</button>
+          <button onClick={() => this.props.onAddFromInput(Number(this.state.numberInInput))}>Добавить число из инпута</button>
         </div>
+
+        <hr/>
+
+        <input onChange={(event) => {
+          this.setState({
+            numberInInput: event.target.value
+          })
+        }}/>
+        <br/>
+        <div className="Actions">
+          <button onClick={() => this.props.onAddFromInput(Number(this.state.numberInInput))}>Добавить число из инпута</button>
+          <button onClick={() => this.props.onSubFromInput(Number(this.state.numberInInput))}>Вычесть число из инпута</button>
+         
+        </div>
+        
+        
       </div>
     )
   }
@@ -30,8 +48,18 @@ class App extends Component {
 
 function mapStateToProps(state){
   return {
-    counter: state.counter
+    counter: state.counter,
+    numberInInput: state.numberInInput
   }
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch){
+  return {
+    onAdd: () => dispatch({type: 'ADD'}),
+    onSub: () => dispatch({type: 'SUB'}),
+    onAddFromInput: (number) => dispatch({type: 'ADD_INPUT', payload: number}),
+    onSubFromInput: (number) => dispatch({type: 'SUB_INPUT', payload: number}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
