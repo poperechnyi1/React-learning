@@ -34,3 +34,11 @@ export function add2(number){
     }
 }
 
+export function asyncAdd (number) {
+    return (dispatch) => {
+        setTimeout(()=>{
+            dispatch(addNumberFromInput(number))
+        }, 3000)
+    }
+}
+
